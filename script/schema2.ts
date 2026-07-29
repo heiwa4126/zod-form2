@@ -3,11 +3,11 @@ import { parseOrderJson, parseOrderObject } from "../lib/order_schema.ts";
 function parseOrderAndPrint(jsonString: string) {
 	const result = parseOrderJson(jsonString);
 
-	if (!result.error) {
-		console.log(result.user);
+	if (!result.err) {
+		console.log(result.res);
 	} else {
 		// ここが汚いのでなんとかしたい
-		const errors = result.error;
+		const errors = result.err;
 		if (errors.formErrors.length > 0) {
 			console.log({ form: errors.formErrors });
 		} else {
@@ -19,11 +19,11 @@ function parseOrderAndPrint(jsonString: string) {
 function verifyOrderAndPrint(o: object) {
 	const result = parseOrderObject(o);
 
-	if (!result.error) {
-		console.log(result.user);
+	if (!result.err) {
+		console.log(result.res);
 	} else {
 		// ここが汚いのでなんとかしたい
-		const errors = result.error;
+		const errors = result.err;
 		if (errors.formErrors.length > 0) {
 			console.log({ form: errors.formErrors });
 		} else {
@@ -39,6 +39,12 @@ function verifyOrderAndPrint(o: object) {
 verifyOrderAndPrint({
 	item: "Banana",
 	name: "John Doe",
+	email: "john.doe@example.com",
+	price: 100
+});
+verifyOrderAndPrint({
+	item: "Banana",
+	name: "",
 	email: "john.doe@example.com",
 	price: 100
 });

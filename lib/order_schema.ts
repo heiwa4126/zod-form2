@@ -2,10 +2,13 @@ import { z } from "zod";
 import { parseJson, parseObject } from "./schema_lib.ts";
 
 const OrderSchema = z.object({
-	name: z.string({
-		error: (issue) =>
-			issue.input === undefined ? "名前は必須です" : "名前は文字列で入力してください"
-	}),
+	name: z
+		.string({
+			error: (issue) =>
+				issue.input === undefined ? "名前は必須です" : "名前は文字列で入力してください"
+		})
+		.min(3, { message: "名前は3文字以上で入力してください" })
+		.max(50, { message: "名前は50文字以下で入力してください" }),
 	email: z
 		.string({
 			error: (issue) =>

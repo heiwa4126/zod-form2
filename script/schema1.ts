@@ -3,11 +3,11 @@ import { parseUserJson, parseUserObject } from "../lib/user_schema.ts";
 function parseUserAndPrint(jsonString: string) {
 	const result = parseUserJson(jsonString);
 
-	if (!result.error) {
-		console.log(result.user);
+	if (!result.err) {
+		console.log(result.res);
 	} else {
 		// ここが汚いのでなんとかしたい
-		const errors = result.error;
+		const errors = result.err;
 		if (errors.formErrors.length > 0) {
 			console.log({ form: errors.formErrors });
 		} else {
@@ -19,11 +19,11 @@ function parseUserAndPrint(jsonString: string) {
 function verifyUserAndPrint(o: object) {
 	const result = parseUserObject(o);
 
-	if (!result.error) {
-		console.log(result.user);
+	if (!result.err) {
+		console.log(result.res);
 	} else {
 		// ここが汚いのでなんとかしたい
-		const errors = result.error;
+		const errors = result.err;
 		if (errors.formErrors.length > 0) {
 			console.log({ form: errors.formErrors });
 		} else {
