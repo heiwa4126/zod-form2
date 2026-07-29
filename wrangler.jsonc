@@ -5,7 +5,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "zod-form1",
-	"main": "src/index.ts",
+	"main": "api/index.ts",
 	"compatibility_date": "2026-07-29",
 	"observability": {
 		"enabled": true

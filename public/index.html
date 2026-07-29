@@ -3,10 +3,53 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Hello!</title>
+		<title>Form test</title>
+		<link rel="stylesheet" href="css/test.css" type="text/css" />
 	</head>
 	<body>
-		<h1>Hello!</h1>
-		<p>world</p>
+		<main>
+			<h1>Form test</h1>
+			<form id="form1" action="/dummy" method="POST">
+				<div>
+					<label for="name">名前:</label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						placeholder="名前を入力してください"
+						value="aaa"
+						required
+					/>
+					<span id="name-error" class="error">dummy</span>
+				</div>
+				<div>
+					<label for="email">メール:</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						placeholder="メールを入力してください"
+						value="aaa@example.com"
+						required
+					/>
+					<span id="email-error" class="error">dummy</span>
+				</div>
+				<div>
+					<label for="item">商品:</label>
+					<select id="item" name="item" required>
+						<option value="" selected>(商品を選んで)</option>
+						<option>りんご</option>
+						<option>バナナ</option>
+						<option>さくらんぼ</option>
+					</select>
+					<span id="item-error" class="error">dummy</span>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</main>
+		<script type="module">
+			import { setSubmitHook } from "./js/index.mjs";
+			setSubmitHook("form1");
+		</script>
 	</body>
 </html>

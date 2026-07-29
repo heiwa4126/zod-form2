@@ -165,3 +165,10 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+
+tmp/
+tmp*
+*.tmp
+
+public/js/
