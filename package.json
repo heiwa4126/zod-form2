@@ -12,10 +12,13 @@
 		"deploy": "wrangler deploy --minify",
 		"format": "oxfmt",
 		"lint": "oxlint",
-		"check": "oxfmt && oxlint --fix"
+		"check": "oxfmt && oxlint --fix",
+		"schema1": "bun script/schema1.ts",
+		"schema2": "bun script/schema2.ts"
 	},
 	"dependencies": {
-		"hono": "^4.12.32"
+		"hono": "^4.12.32",
+		"zod": "^4.4.3"
 	},
 	"devDependencies": {
 		"@types/node": "^26.1.2",

@@ -9,10 +9,10 @@ export default defineConfig([
 		sourcemap: false,
 		dts: false,
 		minify: true,
-		unbundle: false
-		// deps: {
-		// 	alwaysBundle: ["cowsayjs", "zod"],
-		// 	onlyBundle: false
-		// }
+		unbundle: false,
+		deps: {
+			alwaysBundle: ["zod"],
+			onlyBundle: false
+		}
 	}
 ]);
