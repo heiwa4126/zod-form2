@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { parseJson, parseObject } from "./schema_lib.ts";
+import { parseJson, parseObject } from "./schema_lib";
 
 const OrderSchema = z.object({
 	name: z
