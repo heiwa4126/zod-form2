@@ -172,3 +172,5 @@ tmp*
 *.tmp
 
 public/js/
+
+worker-configuration.d.ts
