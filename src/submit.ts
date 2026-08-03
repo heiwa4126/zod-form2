@@ -17,6 +17,10 @@ function disableSubmitButton(form: HTMLFormElement, status: boolean = true) {
 	}
 }
 
+function getElement(id: string): HTMLElement | null {
+	return document.getElementById(id);
+}
+
 async function submitHook(e: SubmitEvent) {
 	e.preventDefault();
 
@@ -42,7 +46,7 @@ async function submitHook(e: SubmitEvent) {
 			if (!errorMessages || errorMessages.length === 0) {
 				continue;
 			}
-			const errorElement = document.getElementById(`${key}-error`);
+			const errorElement = getElement(`${key}-error`);
 			if (!errorElement) {
 				continue;
 			}
@@ -79,9 +83,10 @@ async function submitHook(e: SubmitEvent) {
 		const text = await res.text();
 
 		mainElement.innerHTML = `<h1>送信成功</h1>
-		<p>HTTPステータス: ${res.status}</p>
-		<p>レスポンス本文: ${escapeHtml(text)}</p>
-		<p>ありがとうございました！</p>`;
+<p>HTTPステータス: ${res.status}</p>
+<p>レスポンス本文: ${escapeHtml(text)}</p>
+<p>ありがとうございました!</p>
+<p><a href="/">トップに戻る</a></p>`;
 	} catch (error) {
 		// console.error("Failed to submit:", error);
 		mainElement.innerHTML = `<h1>送信失敗</h1><p>HTTPエラー: ${error}</p>`;
@@ -89,5 +94,5 @@ async function submitHook(e: SubmitEvent) {
 }
 
 export function setSubmitHook(id: string) {
-	document.getElementById(id)?.addEventListener("submit", submitHook);
+	getElement(id)?.addEventListener("submit", submitHook);
 }

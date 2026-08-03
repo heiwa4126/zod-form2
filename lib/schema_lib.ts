@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 function trimStrings<T>(value: T): T {
 	if (typeof value === "string") {
@@ -66,4 +66,10 @@ export function parseObject<TSchema extends z.ZodTypeAny>(schema: TSchema) {
 	return (objectInput: object): ParseJsonResult<TSchema> => {
 		return parseObjectWithSchema(trimStrings(objectInput), schema);
 	};
+}
+
+type StringInputIssue = { input: unknown };
+export function requiredStringError(label: string) {
+	return (issue: StringInputIssue) =>
+		issue.input === undefined ? `${label}は必須です` : `${label}は文字列で入力してください`;
 }

@@ -14,7 +14,6 @@
 		"format": "oxfmt",
 		"lint": "oxlint",
 		"check": "oxfmt && oxlint --fix",
-		"schema1": "bun script/schema1.ts",
 		"schema2": "bun script/schema2.ts"
 	},
 	"dependencies": {

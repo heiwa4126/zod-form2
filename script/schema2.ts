@@ -37,9 +37,9 @@ function verifyOrderAndPrint(o: object) {
 // parseOrderAndPrint('{"item": "Apple"');
 
 verifyOrderAndPrint({
-	item: "Banana",
-	name: "John Doe",
-	email: "john.doe@example.com",
+	item: "Banana   ",
+	name: "   John Doe   ",
+	email: "  john.doe@example.com ",
 	price: 100
 });
 verifyOrderAndPrint({
