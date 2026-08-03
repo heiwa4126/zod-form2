@@ -25,10 +25,12 @@ async function submitHook(e: SubmitEvent) {
 	e.preventDefault();
 
 	const form = e.currentTarget as HTMLFormElement;
+
 	// Clear previous error messages
 	for (const el of form.querySelectorAll<HTMLElement>(".error")) {
 		el.innerHTML = "";
 	}
+
 	disableSubmitButton(form, true);
 	const formData = new FormData(form);
 	const payload = Object.fromEntries(formData.entries());
@@ -78,6 +80,7 @@ async function submitHook(e: SubmitEvent) {
 		if (!res.ok) {
 			// throw new Error(`HTTP error! status: ${res.status}`);
 			mainElement.innerHTML = `<h1>送信失敗</h1><p>HTTPエラー: ${res.status}</p>`;
+			// TODO: もっとエラー表示を簡単にする
 			return;
 		}
 		const text = await res.text();
@@ -90,6 +93,7 @@ async function submitHook(e: SubmitEvent) {
 	} catch (error) {
 		// console.error("Failed to submit:", error);
 		mainElement.innerHTML = `<h1>送信失敗</h1><p>HTTPエラー: ${error}</p>`;
+		// TODO: もっとエラー表示を簡単にする
 	}
 }
 

@@ -68,7 +68,11 @@ export function parseObject<TSchema extends z.ZodTypeAny>(schema: TSchema) {
 	};
 }
 
-type StringInputIssue = { input: unknown };
+// type StringInputIssue = { input: unknown };
+type StringInputIssue = Parameters<
+	Exclude<z.core.$ZodStringParams["error"], string | undefined>
+>[0];
+
 export function requiredStringError(label: string) {
 	return (issue: StringInputIssue) =>
 		issue.input === undefined ? `${label}は必須です` : `${label}は文字列で入力してください`;
