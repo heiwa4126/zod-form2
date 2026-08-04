@@ -31,9 +31,12 @@ async function submitHook(e: SubmitEvent) {
 		el.innerHTML = "";
 	}
 
-	disableSubmitButton(form, true);
 	const formData = new FormData(form);
 	const payload = Object.fromEntries(formData.entries());
+
+	console.log("送信前の内容:\n", payload); // DEBUG
+
+	disableSubmitButton(form, true);
 	// payload.name = " ①"; // DEBUG
 	const result = parseOrderObject(payload);
 

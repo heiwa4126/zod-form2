@@ -1,5 +1,5 @@
 {
-	"name": "zod-form1",
+	"name": "zod-form2",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
@@ -10,7 +10,10 @@
 		"build": "tsdown",
 		"login": "wrangler login",
 		"login-no-browser": "wrangler login --browser false",
-		"deploy": "wrangler deploy --minify",
+		"deploy:pre": "bun --env-file .env.production script/inject-site-key.mjs",
+		"deploy:main": "wrangler deploy --env-file .env.production --minify",
+		"deploy:post": "bun --env-file .env.production script/inject-site-key.mjs -r",
+		"deploy": "bun run --sequential deploy:pre deploy:main deploy:post",
 		"format": "oxfmt",
 		"lint": "oxlint",
 		"check": "oxfmt && oxlint --fix",

@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "zod-form1",
+	"name": "zod-form2",
 	"main": "api/index.ts",
 	"compatibility_date": "2026-07-29",
 	"observability": {
@@ -16,6 +16,9 @@
 		// The path to the directory containing the `index.html` file to be served at `/`
 		"directory": "./public",
 		"run_worker_first": ["/api/*"]
+	},
+	"secrets": {
+		"required": ["TURNSTILE_SITE_KEY", "TURNSTILE_SECRET"]
 	}
 	/**
 	 * Smart Placement

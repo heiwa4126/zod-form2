@@ -1,7 +1,10 @@
-# zod-form1
+# zod-form2
 
-Cloudflare Workers として書く
-(TODO)
+[zod-form1](https://github.com/heiwa4126/zod-form1)
+に Cloudflare Turnstile をつけてみる。
+
+[cfw-turnstile1](https://github.com/heiwa4126/cfw-turnstile1)
+を混ぜたもの。
 
 # 実行
 

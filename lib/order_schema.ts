@@ -12,7 +12,8 @@ const OrderSchema = z.object({
 			error: "メールアドレスの形式で入力してください"
 		})
 	),
-	item: z.string({ error: requiredStringError("商品") }).trim()
+	item: z.string({ error: requiredStringError("商品") }).trim(),
+	"cf-turnstile-response": z.string() // Cloudflare Turnstile のレスポンス
 });
 
 export const parseOrderJson = parseJson(OrderSchema);

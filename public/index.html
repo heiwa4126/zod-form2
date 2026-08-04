@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Form test</title>
 		<link rel="stylesheet" href="css/test.css" type="text/css" />
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 	</head>
 	<body>
 		<main>
@@ -18,6 +19,9 @@
 						name="name"
 						placeholder="名前を入力してください"
 						value="aaa"
+						minlength="3"
+						maxlength="50"
+						pattern=".*\S.*"
 						required
 					/>
 					<span id="name-error" class="error"></span>
@@ -44,6 +48,12 @@
 					</select>
 					<span id="item-error" class="error"></span>
 				</div>
+				<!-- Turnstile widget with basic configuration -->
+				<div
+					class="cf-turnstile"
+					data-sitekey="1x00000000000000000000AA"
+					data-callback="onTurnstileSuccess"
+				></div>
 				<button type="submit">Submit</button>
 			</form>
 		</main>
