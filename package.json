@@ -16,6 +16,7 @@
 		"deploy": "bun run --sequential deploy:pre deploy:main deploy:post",
 		"format": "oxfmt",
 		"lint": "oxlint",
+		"lint-tsc": "tsc --noEmit",
 		"check": "oxfmt && oxlint --fix",
 		"schema2": "bun script/schema2.ts"
 	},

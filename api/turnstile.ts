@@ -18,7 +18,7 @@ export async function validateTurnstile(
 			body: JSON.stringify({
 				secret,
 				response: token,
-				remoteip: remoteip
+				remoteip
 			})
 		});
 

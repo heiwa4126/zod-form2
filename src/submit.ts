@@ -1,4 +1,4 @@
-import { parseOrderTsObject } from "../lib/order_ts_schema.ts";
+import { parseOrderTsObject } from "../lib/order_ts_schema";
 
 function escapeHtml(value: string): string {
 	return value
@@ -70,6 +70,7 @@ async function submitHook(e: SubmitEvent) {
 		return;
 	}
 	mainElement.innerHTML = `<h1>送信中...</h1><p>送信内容: ${escapeHtml(JSON.stringify(result.res))}</p>`;
+	// TODO: 送信中の表示をもっと簡単にする
 
 	// エラーがなければ POST /api/mail0 に送信する
 	try {
