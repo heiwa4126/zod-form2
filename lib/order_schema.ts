@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { parseJson, parseObject, requiredStringError } from "./schema_lib";
 
-const OrderSchema = z.object({
+export const OrderSchema = z.object({
 	name: z
 		.string({ error: requiredStringError("名前") })
 		.trim()
@@ -12,8 +12,7 @@ const OrderSchema = z.object({
 			error: "メールアドレスの形式で入力してください"
 		})
 	),
-	item: z.string({ error: requiredStringError("商品") }).trim(),
-	"cf-turnstile-response": z.string() // Cloudflare Turnstile のレスポンス
+	item: z.string({ error: requiredStringError("商品") }).trim()
 });
 
 export const parseOrderJson = parseJson(OrderSchema);

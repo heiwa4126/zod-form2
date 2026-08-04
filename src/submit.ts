@@ -1,4 +1,4 @@
-import { parseOrderObject } from "../lib/order_schema.ts";
+import { parseOrderTsObject } from "../lib/order_ts_schema.ts";
 
 function escapeHtml(value: string): string {
 	return value
@@ -38,7 +38,7 @@ async function submitHook(e: SubmitEvent) {
 
 	disableSubmitButton(form, true);
 	// payload.name = " ①"; // DEBUG
-	const result = parseOrderObject(payload);
+	const result = parseOrderTsObject(payload);
 
 	setTimeout(() => {
 		disableSubmitButton(form, false);

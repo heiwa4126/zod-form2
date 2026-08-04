@@ -25,7 +25,7 @@ export async function validateTurnstile(
 		const result = (await response.json()) as TurnstileVerifyResult;
 		return result;
 	} catch (error) {
-		console.error("Turnstile validation error:", error);
-		return { success: false, "error-codes": ["internal-error"] };
+		// console.error("Turnstile validation error:", error);
+		return { success: false, "error-codes": ["internal-error", (error as Error).message] };
 	}
 }
