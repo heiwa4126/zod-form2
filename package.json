@@ -11,7 +11,7 @@
 		"login": "wrangler login",
 		"login-no-browser": "wrangler login --browser false",
 		"deploy:pre": "bun --env-file .env.production script/inject-site-key.mjs",
-		"deploy:main": "wrangler deploy --env-file .env.production --minify",
+		"deploy:main": "wrangler deploy --secrets-file .env.production --minify",
 		"deploy:post": "bun --env-file .env.production script/inject-site-key.mjs -r",
 		"deploy": "bun run --sequential deploy:pre deploy:main deploy:post",
 		"format": "oxfmt",
