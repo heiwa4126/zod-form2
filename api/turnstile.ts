@@ -1,13 +1,6 @@
-const ALWAYS_FAIL_SECRET_KEY = "2x0000000000000000000000000000000AA";
-// see https://developers.cloudflare.com/turnstile/troubleshooting/testing/#testing-scenarios
-
 type TurnstileVerifyResult = {
 	success: boolean;
 	["error-codes"]?: string[];
-};
-
-export type AppEnv = Env & {
-	TURNSTILE_SECRET?: string;
 };
 
 export async function validateTurnstile(
@@ -35,42 +28,4 @@ export async function validateTurnstile(
 		console.error("Turnstile validation error:", error);
 		return { success: false, "error-codes": ["internal-error"] };
 	}
-}
-
-export async function buildTurnstileErrorResponse(
-	request: Request,
-	env: AppEnv,
-	formData: FormData
-): Promise<Response | undefined> {
-	const token = formData.get("cf-turnstile-response");
-	if (typeof token !== "string" || token.length === 0) {
-		return textPlainResponse("Turnstile token is missing.", 400);
-	}
-
-	const secret = env.TURNSTILE_SECRET ?? ALWAYS_FAIL_SECRET_KEY;
-
-	const remote_ip =
-		request.headers.get("CF-Connecting-IP") ?? request.headers.get("X-Forwarded-For") ?? undefined;
-	const verifyResult = await validateTurnstile(secret, token, remote_ip);
-
-	if (!verifyResult.success) {
-		const errorCodes = verifyResult["error-codes"]?.join(",") ?? "unknown-error";
-		return textPlainResponse(`Turnstile verification failed: ${errorCodes}`, 403);
-	}
-
-	return undefined;
-}
-
-// プレーンテキストのレスポンスを生成
-export function textPlainResponse(value: string | number, status = 200): Response {
-	const body = String(value);
-	const contentLength = new TextEncoder().encode(body).length.toString();
-
-	return new Response(body, {
-		status,
-		headers: {
-			"content-type": "text/plain; charset=utf-8",
-			"content-length": contentLength
-		}
-	});
 }

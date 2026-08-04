@@ -26,7 +26,7 @@ bun run login-no-browser
 
 # デプロイ
 bun run deploy
-## cloudflare workers で試す
+## デプロイすると URL がきまるので、これを turnstile の設定に追加する
 
 # 消す
 bun run delete

@@ -1,10 +1,29 @@
-import type { Context } from "hono";
-import { Hono } from "hono";
+import { Hono, type Context, type HonoRequest } from "hono";
 import { parseOrderJson } from "../lib/order_schema";
 import { validateTurnstile } from "./turnstile";
 
 function die(c: Context) {
 	c.text("Internal Server Error", 500);
+}
+
+async function verifyTurnstileToken(token: string | undefined, req: HonoRequest) {
+	const ALWAYS_FAIL_SECRET = "2x0000000000000000000000000000000AA";
+	// see https://developers.cloudflare.com/turnstile/troubleshooting/testing/#testing-scenarios
+
+	if (!token || token === "") {
+		return false;
+	}
+	const remote_ip = req.header("CF-Connecting-IP") ?? req.header("X-Forwarded-For") ?? undefined;
+	const secret = process.env.TURNSTILE_SECRET || ALWAYS_FAIL_SECRET;
+
+	console.log("Turnstile validation request:", {
+		secret,
+		token,
+		remote_ip
+	});
+
+	const result = await validateTurnstile(secret, token, remote_ip);
+	return result.success;
 }
 
 const app = new Hono();
@@ -24,23 +43,8 @@ app.post("/api/mail0", async (c) => {
 	const res = result.res;
 
 	// Cloudflare Turnstile の検証
-	const token = res["cf-turnstile-response"];
-	if (!token) {
-		return die(c);
-	}
-	const remote_ip =
-		c.req.header("CF-Connecting-IP") ?? c.req.header("X-Forwarded-For") ?? undefined;
-	const secret = process.env.TURNSTILE_SECRET || "";
-
-	console.log("Turnstile validation request:", {
-		secret,
-		token,
-		remote_ip
-	});
-
-	const verifyResult = await validateTurnstile(secret, token, remote_ip);
-	console.log("Turnstile validation result:", verifyResult);
-	if (!verifyResult.success) {
+	const turnstileResult = await verifyTurnstileToken(res["cf-turnstile-response"], c.req);
+	if (!turnstileResult) {
 		return die(c);
 	}
 
