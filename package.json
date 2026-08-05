@@ -8,6 +8,7 @@
 		"start": "wrangler dev",
 		"cf-typegen": "wrangler types",
 		"build": "tsdown",
+		"build-bun": "bun build ./src/index.ts --outdir ./public/js --minify --target node --format esm",
 		"login": "wrangler login",
 		"login-no-browser": "wrangler login --browser false",
 		"deploy:pre": "bun --env-file .env.production script/inject-site-key.mjs",
