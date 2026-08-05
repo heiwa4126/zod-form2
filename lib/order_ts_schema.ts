@@ -1,17 +1,11 @@
-import { z } from "zod";
+// OrderSchema に "cf-turnstile-response" というフィールドを追加した新しいスキーマ "orderTsSchema" と
+// サポート関数を作成する
+
 import { OrderSchema } from "./order_schema";
-import { parseJson, parseObject } from "./schema_lib";
+import { withTsSchema } from "./with_ts_schema";
 
-const OrderTsSchema = OrderSchema.extend({
-	"cf-turnstile-response": z.string().min(1) // Cloudflare Turnstile のレスポンス
-});
+const orderTsSchema = withTsSchema(OrderSchema);
 
-export const parseOrderTsJson = parseJson(OrderTsSchema);
-export const parseOrderTsObject = parseObject(OrderTsSchema);
-
-type Order = z.infer<typeof OrderSchema>;
-type OrderTs = z.infer<typeof OrderTsSchema>;
-export function parseOrder(input: OrderTs): Order {
-	// OrderTS から "cf-turnstile-response" を型安全に除外する
-	return OrderSchema.parse(input);
-}
+export const parseOrderTsJson = orderTsSchema.parseJson;
+export const parseOrderTsObject = orderTsSchema.parseObject;
+export const parseOrder = orderTsSchema.parseBase;

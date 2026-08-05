@@ -68,6 +68,14 @@ export function parseObject<TSchema extends z.ZodTypeAny>(schema: TSchema) {
 	};
 }
 
+export function parseInto<TInputSchema extends z.ZodTypeAny, TOutputSchema extends z.ZodTypeAny>(
+	schema: TOutputSchema
+) {
+	return (input: z.infer<TInputSchema>): z.infer<TOutputSchema> => {
+		return schema.parse(input);
+	};
+}
+
 // type StringInputIssue = { input: unknown };
 type StringInputIssue = Parameters<
 	Exclude<z.core.$ZodStringParams["error"], string | undefined>
