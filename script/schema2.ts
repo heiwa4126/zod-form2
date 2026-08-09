@@ -1,4 +1,4 @@
-import { parseOrderJson, parseOrderObject } from "../lib/order_schema.ts";
+import { parseOrderJson, parseOrderObject } from "@heiwa4126/order-schema";
 
 function parseOrderAndPrint(jsonString: string) {
 	const result = parseOrderJson(jsonString);

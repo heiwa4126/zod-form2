@@ -1,6 +1,6 @@
+import { withTsSchema } from "@heiwa4126/order-schema";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { withTsSchema } from "../lib/with_ts_schema";
 
 describe("withTsSchema", () => {
 	const baseSchema = z.object({

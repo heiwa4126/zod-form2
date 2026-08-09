@@ -1,4 +1,4 @@
-import { parseOrderTsObject } from "../lib/order_ts_schema";
+import { parseOrderTsObject } from "@heiwa4126/order-schema";
 
 function escapeHtml(value: string): string {
 	return value

@@ -22,6 +22,7 @@
 		"schema2": "bun script/schema2.ts"
 	},
 	"dependencies": {
+		"@heiwa4126/order-schema": "/home/heiwa/works/zod/order-schema",
 		"hono": "^4.13.1",
 		"zod": "^4.4.3"
 	},

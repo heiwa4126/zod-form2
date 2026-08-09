@@ -1,5 +1,5 @@
+import { parseOrder, parseOrderTsJson } from "@heiwa4126/order-schema";
 import { Hono, type Context, type HonoRequest } from "hono";
-import { parseOrder, parseOrderTsJson } from "../lib/order_ts_schema";
 import { validateTurnstile } from "./turnstile";
 
 function die(c: Context) {

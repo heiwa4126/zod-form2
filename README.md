@@ -10,6 +10,8 @@
 
 ```sh
 bun ci
+# @heiwa4126/order-schema がローカル参照になっているので
+# パスが変更されている場合はpackage.jsonを修正すること
 bun audit
 bun run cf-typegen
 bun run build # src/ 以下を public/js/index.mjs に生成する
