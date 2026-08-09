@@ -47,9 +47,35 @@ app.post("/api/mail0", async (c) => {
 		return die(c);
 	}
 
-	// Do something with the validated data (res) here, e.g., send an email, store in a database, etc.
+	const payload = parseOrder(res);
+	// Do something with the validated data (res) here,
+	// e.g., send an email, store in a database, etc.
 
-	return c.json({ timestamp: new Date().toISOString(), result: parseOrder(res) });
+	// return c.json({ timestamp: new Date().toISOString(), result: payload });
+
+	const api1 = process.env.API1;
+	const api1_key = process.env.API1_KEY;
+	if (!api1 || !api1_key) {
+		return die(c);
+	}
+
+	try {
+		const api1_res = await fetch(api1, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Basic ${api1_key}`
+			},
+			body: JSON.stringify(payload)
+		});
+		if (!api1_res.ok) {
+			return die(c);
+		}
+		return c.json(await api1_res.json(), 200);
+	} catch (error) {
+		console.error("Error while sending request to API1:", error);
+		return die(c);
+	}
 });
 
 export default app;

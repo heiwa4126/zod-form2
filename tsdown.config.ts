@@ -11,7 +11,7 @@ export default defineConfig([
 		minify: true,
 		unbundle: false,
 		deps: {
-			alwaysBundle: ["zod"],
+			alwaysBundle: ["zod", "@heiwa4126/order-schema"],
 			onlyBundle: false
 		}
 	}
