@@ -11,9 +11,9 @@
 		"build-bun": "bun build ./src/index.ts --outdir ./public/js --minify --target node --format esm",
 		"login": "wrangler login",
 		"login-no-browser": "wrangler login --browser false",
-		"deploy:pre": "bun --env-file .env.production script/inject-site-key.mjs",
-		"deploy:main": "wrangler deploy --secrets-file .env.production --minify",
-		"deploy:post": "bun --env-file .env.production script/inject-site-key.mjs -r",
+		"deploy:pre": "bun --env-file .dev.vars.production script/inject-site-key.mjs",
+		"deploy:main": "wrangler deploy --secrets-file .dev.vars.production --minify",
+		"deploy:post": "bun --env-file .dev.vars.production script/inject-site-key.mjs -r",
 		"deploy": "bun run --sequential deploy:pre deploy:main deploy:post",
 		"format": "oxfmt",
 		"lint": "oxlint",
@@ -23,13 +23,13 @@
 	},
 	"dependencies": {
 		"@heiwa4126/order-schema": "link:@heiwa4126/order-schema",
-		"hono": "^4.13.1",
+		"hono": "^4.13.2",
 		"zod": "^4.4.3"
 	},
 	"devDependencies": {
 		"@types/node": "^26.2.0",
 		"tsdown": "^0.22.14",
 		"typescript": "^7.0.2",
-		"wrangler": "^4.120.0"
+		"wrangler": "^4.123.0"
 	}
 }

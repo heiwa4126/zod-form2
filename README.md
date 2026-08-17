@@ -16,6 +16,11 @@ bun audit
 bun run cf-typegen
 bun run build # src/ 以下を public/js/index.mjs に生成する
 
+# 設定ファイル
+cp .dev.vars.example .dev.vars
+cp .dev.vars.example .dev.vars.production
+## .dev.vars と .dev.vars.production を編集
+
 # 開発
 bun run dev
 bun run cf-typegen # wrangler.jsoncを編集したら実行
